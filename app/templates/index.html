@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta charset='UTF-8'>
+        <title>Turret Control</title>
+    </head>
+    <body>
+        <div class="noise"></div>
+        <div class="overlay"></div>
+        <div class="terminal">
+        <h1>Turret <span class="errorcode">Control</span></h1>
+            <p class="output" id="output-desktop">Desktop: Connecting</p>
+            <p class="output" id="output-mobile">Mobile: Connecting</p>
+            <div class="desktop-position">
+                <canvas id="canvas"></canvas>
+            </div>
+            <div id="video-section">
+                <div class="video-overlay"><img src="/static/img/crosshair.png" draggable="false"></div>
+                <img src="http://192.168.1.43:6001/video_feed">
+            </div>
+            <div id="instructions">
+                <p class="output">Press <a href="#1">WASD</a> to aim</p>
+                <p class="output">Press <a href="#2">space</a> to fire</a></p>
+            </div>
+            <div id="joystick-section"></div>
+            <div id="button-section">
+                <div id="button">
+                    <p class="button-text">Fire</p>
+                </div>
+            </div>
+        </div>
+        <script src="/static/js/jquery-3.3.1.min.js"></script>
+        <script src="/static/js/socket.io.js"></script>
+        <script src="/static/js/main.js"></script>
+        </body>
+</html>
