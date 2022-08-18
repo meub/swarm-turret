@@ -1,6 +1,8 @@
 # The SwarmTurret 
 
-This is the web app for a 3D printed, websockets controlled Nerf turret with streaming video I built. It's powered by a Raspberry Pi 4 and three servos for the X axis, Y axis and firing control. More details on the build process can be found [here](https://alexmeub.com/building-a-web-controlled-nerf-turret/) and detail on the hardware and 3D printed parts can be found [here](https://www.printables.com/model/255165-swarmturret-web-controlled-foam-dart-turret).
+This is the web app for a 3D printed, websockets controlled Nerf turret with streaming video I built. It's powered by a Raspberry Pi 4 and three servos for the X axis, Y axis and firing control. See the turret in action [here](https://www.youtube.com/shorts/W1DCnf5MDu8).
+
+More details on the build process can be found [here](https://alexmeub.com/building-a-web-controlled-nerf-turret/) and detail on the hardware and 3D printed parts can be found [here](https://www.printables.com/model/255165-swarmturret-web-controlled-foam-dart-turret).
 
 This project was heavily inspired by [Tobias Weis' robotcontrol-javascript project](https://github.com/TobiasWeis/robotcontrol-javascript).
 
@@ -23,4 +25,4 @@ Due to issues with lag, this solution runs as two separate Flask apps. One for t
 
 ![Nerf Turret V1](/nerf-turret-v1.png)
 
-![Nerf Turret Web App](/nerf-turret-mobile.gif)
+![Nerf Turret Web App](/nerf-turret-ui-screenshot.png)
