@@ -77,7 +77,7 @@ while running:
 	# Use while statements to prevent key repeat which is 
 	# the desired behavior for controlling servos 
 	# (we don't want servos to move after key is released)
-	while keyboard.is_pressed("up"):
+	while keyboard.is_pressed("w"):
 		y_position=y_position+y_increment_unit
 		if( y_position > y_max ):
 			print("Y is over max")
@@ -88,7 +88,7 @@ while running:
 			time.sleep(0.02)
 			print( kit.servo[y_axis].angle )
 
-	while keyboard.is_pressed("down"):
+	while keyboard.is_pressed("s"):
 		y_position=y_position-y_increment_unit
 		if( y_position < y_min ):
 			print("Y is under min")
@@ -99,7 +99,7 @@ while running:
 			time.sleep(0.02)
 			print( kit.servo[y_axis].angle )
 
-	while keyboard.is_pressed("left"):
+	while keyboard.is_pressed("a"):
 		#print("LEFT")
 		#kit.continuous_servo[x_axis].throttle = -1
 		x_position=x_position-x_increment_unit
@@ -112,7 +112,7 @@ while running:
 			time.sleep(0.02)
 			print( kit.servo[x_axis].angle )	
 
-	while keyboard.is_pressed("right"):
+	while keyboard.is_pressed("d"):
 		#print("RIGHT")
 		#kit.continuous_servo[x_axis].throttle = 1
 		x_position=x_position+x_increment_unit

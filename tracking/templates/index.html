@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta charset='UTF-8'>
+        <title>Turret Control</title>
+    </head>
+    <body>
+        <div class="noise"></div>
+        <div class="overlay"></div>
+        <div class="terminal">
+        <h1>Turret <span class="errorcode">Control</span></h1>
+            <p class="output" id="output-desktop">Desktop: Autonomous Mode</p>
+            <p class="output" id="output-mobile">Mobile: Autonmous Mode</p>
+      
+            <div id="video-section">
+                <!--<div class="video-overlay"><img src="/static/img/crosshair.png" draggable="false"></div>-->
+                <img id="bg" src="{{ url_for('video_feed') }}">
+            </div>
+        </div>
+        <!--<script src="/static/js/jquery-3.3.1.min.js"></script>
+        <script src="/static/js/socket.io.js"></script>
+        <script src="/static/js/main.js"></script>-->
+        </body>
+</html>
