@@ -26,6 +26,7 @@ Jinja2==3.1.6
 lgpio==0.2.2.0
 MarkupSafe==3.0.2
 numpy==2.2.5
+opencv-python==4.11.0.86
 packaging==25.0
 pyftdi==0.56.0
 pyserial==3.5

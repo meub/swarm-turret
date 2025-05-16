@@ -4,3 +4,20 @@ Traceback (most recent call last):
 ModuleNotFoundError: No module named 'cv2'
 Servo init
 Servo init
+Traceback (most recent call last):
+  File "/home/pi/swarm-turret/camera.py", line 2, in <module>
+    import cv2
+ModuleNotFoundError: No module named 'cv2'
+Servo init
+Servo init
+Servo init
+Servo init
+ * Serving Flask app 'camera'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:6001
+ * Running on http://192.168.1.172:6001
+[33mPress CTRL+C to quit[0m
+192.168.1.240 - - [16/May/2025 11:12:31] "GET / HTTP/1.1" 200 -
+192.168.1.240 - - [16/May/2025 11:12:37] "GET /video_feed HTTP/1.1" 200 -
