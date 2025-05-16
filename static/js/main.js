@@ -9,7 +9,7 @@ var socket_control = io.connect('http://'+location.host+"/control");
     /* connected display */
     
     setInterval(function(){
-        if(socket_status.connected){
+        if(socket_control.connected){
             $('#output-desktop').html('Desktop: Connected');
             $('#output-mobile').html('Mobile: Connected');
         }else{
@@ -51,19 +51,18 @@ var socket_control = io.connect('http://'+location.host+"/control");
         canvas.height = canvas_size;
         
         var camera = {
-            x: 50,
-            y: 50,
+            x: 150,
+            y: 150,
             velY: 0,
             velX: 0,
             color: "red"
         };
         
-
         function update() {
             // Check if keys are pressed
             if (keys['w']) {
-                if (camera.velY > -speed) {
-                    camera.velY--;
+                if (camera.velY < speed) {
+                    camera.velY++;
                 }
             }
             if (keys['a']) {
@@ -72,8 +71,8 @@ var socket_control = io.connect('http://'+location.host+"/control");
                 }
             }            
             if (keys['s']) {
-                if (camera.velY < speed) {
-                    camera.velY++;
+                if (camera.velY > -speed) {
+                    camera.velY--;
                 }
             }
             if (keys['d']) {
@@ -96,7 +95,6 @@ var socket_control = io.connect('http://'+location.host+"/control");
             camera.velX *= friction;
             camera.x += camera.velX;
         
-
             // Convert position to servo position
             var coords = convertRatio( camera.x, camera.y, 0, 300, -1, 1);
             var camera_x = camera.x;

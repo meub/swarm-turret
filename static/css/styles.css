@@ -193,11 +193,12 @@ a::after {
         font-size:  1.5em;
         margin:  10px 0;
     }
-
+    #coords-x,#coords-y {
+        display:none;
+    }
     #instructions {
         display: none;
     }
-
     .terminal {
         padding: 0.5rem;
     }
