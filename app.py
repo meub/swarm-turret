@@ -63,4 +63,5 @@ def default_error_handler(e):
 
 if __name__ == '__main__':
     socketio.run(app, host=SERVER_HOST, port=SERVER_PORT,
-                 debug=DEV_MODE, use_reloader=False)
+                 debug=DEV_MODE, use_reloader=False,
+                 allow_unsafe_werkzeug=True)
