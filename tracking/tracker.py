@@ -49,8 +49,8 @@ class Tracker:
                 continue
 
             detections = self._detector.detect(frame)
-
             if detections:
+                print(f"[Tracker] Detected {len(detections)} target(s)")
                 # Pick largest detection (closest target)
                 largest = max(detections, key=lambda d: d[2] * d[3])
                 bx, by, bw, bh = largest
@@ -73,6 +73,7 @@ class Tracker:
                     cur_x, cur_y = self._turret.get_angles()
                     new_x = cur_x + err_x * TRACKING_P_GAIN
                     new_y = cur_y + err_y * TRACKING_P_GAIN
+                    print(f"[Tracker] err=({err_x:.0f},{err_y:.0f}) angle ({cur_x:.1f},{cur_y:.1f})->({new_x:.1f},{new_y:.1f})")
                     self._turret.set_angles(new_x, new_y)
 
             elapsed = time.time() - start
