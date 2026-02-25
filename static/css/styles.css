@@ -35,12 +35,6 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    /*background: repeating-linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) 0,
-        rgba(0, 0, 0, 0.3) 50%,
-        rgba(0, 0, 0, 0) 100%
-    );*/
     background-size: auto 4px;
     z-index: 1;
     display:none;
@@ -66,20 +60,7 @@ body {
         transparent 100%
     );
     background-repeat: no-repeat;
-    /*animation: scan 7.5s linear 0s infinite;*/
 }
-
-/*
-@keyframes scan {
-    0% {
-        background-position: 0 -100vh;
-    }
-    35%,
-    100% {
-        background-position: 0 100vh;
-    }
-}
-*/
 
 .video-overlay {
     height:80px;
@@ -87,7 +68,6 @@ body {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%,-50%);
-    background-image:url() contain;
 }
 
 .video-overlay img {
@@ -95,7 +75,7 @@ body {
     width: 100%;
     max-height: 100%;
     display: block;
-    margin-top:20px; 
+    margin-top:20px;
 }
 #video-section {
   width: 800px;
@@ -107,7 +87,7 @@ body {
 }
 
 #video-section img {
-    margin-top:20px; 
+    margin-top:20px;
     width:100%;
 }
 
@@ -150,7 +130,7 @@ canvas {
 
 .coordinates {
     padding: 0rem;
-    font-size: 1rem; 
+    font-size: 1rem;
 }
 
 #output-mobile {
@@ -186,8 +166,56 @@ a::after {
     color: white;
 }
 
+/* --- Tracking toggle --- */
+#tracking-section {
+    margin: 10px auto;
+}
 
-@media (max-width: 770px) {  
+.tracking-toggle {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.tracking-toggle input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(128, 255, 128, 0.6);
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+}
+
+.tracking-toggle input[type="checkbox"]:checked {
+    background: rgba(51, 255, 51, 0.4);
+    border-color: rgba(51, 255, 51, 1);
+    box-shadow: 0 0 6px rgba(51, 255, 51, 0.6);
+}
+
+.tracking-toggle input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    width: 4px;
+    height: 9px;
+    border: solid rgba(128, 255, 128, 1);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.tracking-status {
+    font-size: 0.9rem;
+    margin: 4px 0;
+}
+
+
+@media (max-width: 770px) {
 
     h1 {
         font-size:  1.5em;
@@ -220,7 +248,6 @@ a::after {
         position: absolute;
         top: 50%; left: 50%;
         transform: translate(-50%,-50%);
-        background-image:url() contain;
     }
     #video-section img {
         margin-top:0px;
@@ -247,4 +274,3 @@ a::after {
     }
 
 }
-

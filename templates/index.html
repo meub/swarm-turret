@@ -13,7 +13,7 @@
         <h1>Turret <span class="errorcode">Control</span></h1>
             <p class="output" id="output-desktop">Desktop: Connecting</p>
             <p class="output" id="output-mobile">Mobile: Connected</p>
-            
+
             <p class="output coordinates" id="coords-x"></p>
             <p class="output coordinates" id="coords-y"></p>
 
@@ -22,7 +22,14 @@
             </div>
             <div id="video-section">
                 <div class="video-overlay"><img src="/static/img/crosshair.png" draggable="false"></div>
-                <img src="http://192.168.1.172:6001/video_feed">
+                <img id="video-feed" src="/video_feed">
+            </div>
+            <div id="tracking-section">
+                <label class="tracking-toggle">
+                    <input type="checkbox" id="tracking-checkbox">
+                    <span class="tracking-label">Autonomous Tracking</span>
+                </label>
+                <p class="output tracking-status" id="tracking-status">Tracking: OFF</p>
             </div>
             <div id="instructions">
                 <p class="output">Press <a href="#1">WASD</a> to aim</p>
@@ -35,8 +42,7 @@
                 </div>
             </div>
         </div>
-        <script src="/static/js/jquery-3.3.1.min.js"></script>
-	<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-    <script src="/static/js/main.js"></script>
-        </body>
+        <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+        <script src="/static/js/app.js"></script>
+    </body>
 </html>
