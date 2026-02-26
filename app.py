@@ -48,6 +48,7 @@ def handle_control(message):
 
 @socketio.on('tracking', namespace='/control')
 def handle_tracking(message):
+    print(f"[Server] Tracking event received: {message}")
     enabled = message.get('enabled', False)
     if enabled:
         tracker.start()

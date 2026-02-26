@@ -4,6 +4,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/home/pi/swarm-turret
+Environment=PYTHONUNBUFFERED=1
 ExecStart=/home/pi/swarm-turret/.venv/bin/python app.py
 Restart=on-failure
 User=pi

@@ -15,7 +15,12 @@ var trackingCheckbox = document.getElementById('tracking-checkbox');
 var trackingStatus = document.getElementById('tracking-status');
 
 trackingCheckbox.addEventListener('change', function () {
+    console.log('Tracking toggle:', trackingCheckbox.checked);
     socket_control.emit('tracking', { enabled: trackingCheckbox.checked });
+});
+
+socket_control.on('connect', function () {
+    console.log('Socket connected to /control');
 });
 
 socket_control.on('tracking_status', function (data) {
