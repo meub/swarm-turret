@@ -38,6 +38,10 @@ TRACKING_FPS = 10
 TRACKING_DOWNSCALE_WIDTH = 480
 TRACKING_DOWNSCALE_HEIGHT = 360
 
+# --- Scan (patrol when no target) ---
+SCAN_SPEED = 0.5               # degrees per frame while scanning
+SCAN_Y_ANGLE = 110             # fixed Y angle during scan
+
 # --- Server ---
 SERVER_HOST = "0.0.0.0"
 SERVER_PORT = 5000
