@@ -11,7 +11,9 @@ class HOGPersonDetector:
     def detect(self, frame):
         """Run detection on a frame. Returns list of (x, y, w, h) bounding boxes."""
         small = cv2.resize(frame, (TRACKING_DOWNSCALE_WIDTH, TRACKING_DOWNSCALE_HEIGHT))
-        boxes, _ = self._hog.detectMultiScale(small, winStride=(8, 8), scale=1.05)
+        boxes, weights = self._hog.detectMultiScale(
+            small, winStride=(4, 4), padding=(8, 8), scale=1.05,
+        )
 
         # Scale boxes back to original frame size
         scale_x = frame.shape[1] / TRACKING_DOWNSCALE_WIDTH
