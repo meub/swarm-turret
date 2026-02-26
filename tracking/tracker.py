@@ -40,6 +40,7 @@ class Tracker:
         center_x = CAMERA_WIDTH / 2
         center_y = CAMERA_HEIGHT / 2
 
+        frame_count = 0
         while self.is_active():
             start = time.time()
 
@@ -49,6 +50,12 @@ class Tracker:
                 continue
 
             detections = self._detector.detect(frame)
+            detect_time = time.time() - start
+            frame_count += 1
+
+            if frame_count % 10 == 1:
+                print(f"[Tracker] Frame {frame_count}: {len(detections)} detection(s), took {detect_time:.3f}s, frame shape {frame.shape}")
+
             if detections:
                 print(f"[Tracker] Detected {len(detections)} target(s)")
                 # Pick largest detection (closest target)
