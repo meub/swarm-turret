@@ -73,9 +73,9 @@ class Tracker:
                 det_cx = bx + bw / 2
                 det_cy = by + bh / 2
 
-                # Pixel error from frame center
-                err_x = det_cx - center_x
-                err_y = det_cy - center_y
+                # Pixel error from frame center (negated to match inverted servos)
+                err_x = -(det_cx - center_x)
+                err_y = -(det_cy - center_y)
 
                 # Apply dead zone
                 if abs(err_x) < TRACKING_DEAD_ZONE:
