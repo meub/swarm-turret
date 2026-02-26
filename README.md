@@ -13,6 +13,7 @@ A single Flask-SocketIO server (`app.py`) handles both video streaming and WebSo
 ```
 app.py              # Single server (video + control)
 config.py           # All constants and settings
+swarm-turret.service # systemd unit for auto-start
 turret/             # Servo and trigger control
 camera/             # Threaded video capture + MJPEG streaming
 tracking/           # Autonomous person detection and tracking
@@ -43,13 +44,26 @@ You can develop and test the UI, video streaming, and tracking logic on your lap
 
 This stubs out servo hardware (logs to console instead) and uses your laptop webcam. Open `http://localhost:5000` in your browser.
 
+## Deployment (Pi)
+
+The included systemd service file auto-starts the turret on boot:
+
+    sudo cp swarm-turret.service /etc/systemd/system/
+    sudo systemctl daemon-reload
+    sudo systemctl enable swarm-turret
+    sudo systemctl start swarm-turret
+
+Check logs with `journalctl -u swarm-turret -f`.
+
+To deploy updates:
+
+    cd ~/swarm-turret && git pull && sudo systemctl restart swarm-turret
+
 ## Getting Started
 
 This project assumes you have the hardware required and have plugged your servos into the servo HAT: X axis (pin 12), Y axis (pin 14), and trigger (pin 13). All pin assignments and angle ranges are configured in `config.py`.
 
 The `keyboard-control.py` script makes it easy to test servo movement from a USB keyboard for calibration.
-
-Start the server with `sh start.sh`. Stop with `sh stop.sh`.
 
 ## Controls
 
@@ -64,6 +78,7 @@ Start the server with `sh start.sh`. Stop with `sh stop.sh`.
 **Autonomous Tracking:**
 - Toggle via the checkbox in the UI
 - Uses HOG person detection to track the largest detected target
+- When no target is found, the turret scans back and forth looking for targets
 - Manual aiming is disabled while tracking is active (fire still works)
 
 ## Configuration
@@ -72,7 +87,25 @@ All settings are in `config.py`:
 - Servo pins, angle ranges, and inversion flags
 - Trigger timing (fire duration, debounce)
 - Camera settings (resolution, FPS, JPEG quality, stream FPS cap)
-- Tracking parameters (P-gain, dead zone, detection FPS)
+- Tracking parameters (P-gain, dead zone, detection FPS, confidence threshold)
+- Scan/patrol settings (speed, Y angle)
 - Server host/port
 - Dev mode flag
+
+## Status
+
+**Working:**
+- Manual control (WASD desktop, joystick mobile)
+- Video streaming (MJPEG, configurable quality/FPS)
+- Firing mechanism
+- Autonomous tracking (detects and follows people)
+- Scan/patrol mode (sweeps when no target)
+- Dev mode for off-Pi development
+- Auto-start via systemd
+
+**Known Issues:**
+- HOG person detection is sporadic — detects roughly 1 in 5-10 frames on Pi 5
+- Occasional false positives (furniture/objects mistaken for people)
+- Y-axis can oscillate when detection bounding boxes are inconsistent between frames
+- A more robust detector (MobileNet SSD, MediaPipe) would improve tracking reliability
 
