@@ -44,6 +44,8 @@ class Tracker:
 
         scan_dir = 1  # 1 = sweeping toward max, -1 = toward min
         frame_count = 0
+        miss_count = 0
+        SCAN_AFTER_MISSES = 30  # start scanning after this many consecutive misses
 
         # Set Y to scan height on start
         self._turret.servo_y.set_angle(SCAN_Y_ANGLE)
@@ -64,6 +66,7 @@ class Tracker:
                 print(f"[Tracker] Frame {frame_count}: {len(detections)} detection(s), took {detect_time:.3f}s")
 
             if detections:
+                miss_count = 0
                 print(f"[Tracker] Detected {len(detections)} target(s)")
                 # Pick largest detection (closest target)
                 largest = max(detections, key=lambda d: d[2] * d[3])
@@ -90,19 +93,27 @@ class Tracker:
                     print(f"[Tracker] err=({err_x:.0f},{err_y:.0f}) angle ({cur_x:.1f},{cur_y:.1f})->({new_x:.1f},{new_y:.1f})")
                     self._turret.set_angles(new_x, new_y)
             else:
-                # No detection — scan back and forth
-                cur_x, _ = self._turret.get_angles()
-                new_x = cur_x + SCAN_SPEED * scan_dir
+                miss_count += 1
+                if miss_count >= SCAN_AFTER_MISSES:
+                    # Scan back and forth, keep current Y
+                    cur_x, cur_y = self._turret.get_angles()
+                    new_x = cur_x + SCAN_SPEED * scan_dir
 
-                # Reverse direction at limits
-                if new_x >= SERVO_X_MAX_ANGLE:
-                    new_x = SERVO_X_MAX_ANGLE
-                    scan_dir = -1
-                elif new_x <= SERVO_X_MIN_ANGLE:
-                    new_x = SERVO_X_MIN_ANGLE
-                    scan_dir = 1
+                    # Reverse direction at limits
+                    if new_x >= SERVO_X_MAX_ANGLE:
+                        new_x = SERVO_X_MAX_ANGLE
+                        scan_dir = -1
+                    elif new_x <= SERVO_X_MIN_ANGLE:
+                        new_x = SERVO_X_MIN_ANGLE
+                        scan_dir = 1
 
-                self._turret.set_angles(new_x, SCAN_Y_ANGLE)
+                    # Gradually return Y to scan height
+                    if abs(cur_y - SCAN_Y_ANGLE) > 1:
+                        new_y = cur_y + (1 if SCAN_Y_ANGLE > cur_y else -1)
+                    else:
+                        new_y = SCAN_Y_ANGLE
+
+                    self._turret.set_angles(new_x, new_y)
 
             elapsed = time.time() - start
             if elapsed < interval:
