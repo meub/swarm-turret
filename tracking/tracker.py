@@ -72,9 +72,9 @@ class Tracker:
                 largest = max(detections, key=lambda d: d[2] * d[3])
                 bx, by, bw, bh = largest
 
-                # Center of detection
+                # Aim at upper third of bounding box (head level)
                 det_cx = bx + bw / 2
-                det_cy = by + bh / 2
+                det_cy = by + bh * 0.3
 
                 # Pixel error from frame center (negated to match inverted servos)
                 err_x = -(det_cx - center_x)
